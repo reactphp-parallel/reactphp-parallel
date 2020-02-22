@@ -1,9 +1,9 @@
 # reactphp-parallel
 
-[![Build Status](https://travis-ci.com/WyriHaximus/reactphp-parallel.png)](https://travis-ci.com/WyriHaximus/reactphp-parallel)
-[![Latest Stable Version](https://poser.pugx.org/WyriHaximus/react-parallel/v/stable.png)](https://packagist.org/packages/WyriHaximus/react-parallel)
-[![Total Downloads](https://poser.pugx.org/WyriHaximus/react-parallel/downloads.png)](https://packagist.org/packages/WyriHaximus/react-parallel)
-[![License](https://poser.pugx.org/wyrihaximus/react-parallel/license.png)](https://packagist.org/packages/wyrihaximus/react-parallel)
+[![Build Status](https://travis-ci.com/reactphp-parallel/reactphp-parallel.png)](https://travis-ci.com/reactphp-parallel/reactphp-parallel)
+[![Latest Stable Version](https://poser.pugx.org/react-parallel/react-parallel/v/stable.png)](https://packagist.org/packages/react-parallel/react-parallel)
+[![Total Downloads](https://poser.pugx.org/react-parallel/react-parallel/downloads.png)](https://packagist.org/packages/react-parallel/react-parallel)
+[![License](https://poser.pugx.org/react-parallel/react-parallel/license.png)](https://packagist.org/packages/react-parallel/react-parallel)
 
 ReactPHP bindings around ext-parallel
 
@@ -12,21 +12,8 @@ ReactPHP bindings around ext-parallel
 To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `~`.
 
 ```
-composer require wyrihaximus/react-parallel 
+composer require react-parallel/react-parallel 
 ```
-
-## Pools
-
-## Low level pools
-
-Low level pools only deal with executing closures on the Runtimes (threads) that make out the pools. And as such there 
-is only one low level pool and that is [`Infinite`](https://github.com/WyriHaximus/reactphp-parallel-infinite-pool), which will, as the name suggest, scale infinitely. While you can use 
-such pools directly these are intended to be used by high level pools which have more control over what and how many 
-things you run on these threads.
-
-Low level pools have an additional feature where you can acquire a group lock that will prevent others from killing the 
-pool. The idea behind low level pools is that hey are never used directly be always by encapsulating high level pool. 
-Once all locks are released you can close/kill a low level pool.  
 
 ## License ##
 

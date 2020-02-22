@@ -1,53 +1,42 @@
-all:
-	composer run-script qa-all --timeout=0
+# set all to phony
+SHELL=bash
 
-all-extended:
-	composer run-script qa-all-extended --timeout=0
+.PHONY: *
 
-ci:
-	composer run-script qa-ci --timeout=0
+ifneq ("$(wildcard /.dockerenv)","")
+    DOCKER_RUN=
+else
+	DOCKER_RUN=docker run --rm -it \
+		-v `pwd`:`pwd` \
+		-w `pwd` \
+		"wyrihaximusnet/php:7.4-zts-alpine3.11-dev"
+endif
 
-ci-extended:
-	composer run-script qa-ci-extended --timeout=0
+all: lint cs-fix cs stan psalm unit infection composer-require-checker composer-unused
 
-ci-windows:
-	composer run-script qa-ci-windows --timeout=0
-
-contrib:
-	composer run-script qa-contrib --timeout=0
+lint:
+	$(DOCKER_RUN) vendor/bin/parallel-lint --exclude vendor .
 
 cs:
-	composer cs
+	$(DOCKER_RUN) vendor/bin/phpcs --parallel=$(nproc)
 
 cs-fix:
-	composer cs-fix
-
-infection:
-	composer infection
-
-unit:
-	composer run-script unit --timeout=0
+	$(DOCKER_RUN) vendor/bin/phpcbf --parallel=$(nproc)
 
 stan:
-	composer run-script stan --timeout=0
+	$(DOCKER_RUN) vendor/bin/phpstan analyse src tests --level max --ansi -c phpstan.neon
 
-unit-coverage:
-	composer run-script unit-coverage --timeout=0
+psalm:
+	$(DOCKER_RUN) vendor/bin/psalm --threads=$(nproc) --shepherd --stats
 
-ci-coverage:
-	composer ci-coverage
+unit:
+	$(DOCKER_RUN) vendor/bin/phpunit --colors=always -c phpunit.xml.dist --coverage-text --coverage-html covHtml --coverage-clover ./build/logs/clover.xml
 
-make qa-unit:
-	./vendor/bin/phpunit --colors=always -c ./phpunit.xml.dist --coverage-text
+infection:
+	$(DOCKER_RUN) vendor/bin/infection --ansi --min-msi=100 --min-covered-msi=100 --threads=$(nproc)
 
-make qa-mutation:
-	./vendor/bin/infection --ansi --min-msi=100 --min-covered-msi=100 --threads=$(nproc)
+composer-require-checker:
+	$(DOCKER_RUN) vendor/bin/composer-require-checker --ignore-parse-errors --ansi -vvv
 
-make qa-lint:
-	./vendor/bin/parallel-lint --exclude vendor .
-
-make qa-phpstan:
-	./vendor/bin/phpstan analyse src tests --level max --ansi -c ./phpstan.neon
-
-make qa-cs:
-	./vendor/bin/php-cs-fixer fix --config=.php_cs --ansi --dry-run --diff --verbose --allow-risky=yes --show-progress=estimating
+composer-unused:
+	$(DOCKER_RUN) composer unused --ansi

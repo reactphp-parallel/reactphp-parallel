@@ -9,6 +9,11 @@
         "text": "infection.log"
     },
     "mutators": {
-        "@default": true
+        "@default": true,
+        "MethodCallRemoval": {
+            "ignore": [
+                "ReactParallel\\Factory::call::29"
+            ]
+        }
     }
 }

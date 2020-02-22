@@ -1,6 +1,6 @@
 {
-    "name": "wyrihaximus/react-parallel",
-    "description": "Bridging ext-parallel and ReactPHP",
+    "name": "react-parallel/react-parallel",
+    "description": "\ud83c\udf09 Bridging ext-parallel and ReactPHP",
     "license": "MIT",
     "authors": [
         {
@@ -10,107 +10,45 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "ext-parallel": "*",
+        "react-parallel/future-to-promise-converter": "dev-master",
+        "react-parallel/runtime": "dev-master",
         "react/event-loop": "^1.1",
         "react/promise": "^2.7",
-        "reactivex/rxphp": "^2.0",
-        "wyrihaximus/pool-info": "^1.0",
-        "wyrihaximus/react-parallel-contracts": "^1.0",
-        "wyrihaximus/react-parallel-future-to-promise-converter": "^1.1 || ^1.0.1",
-        "wyrihaximus/react-parallel-infinite-pool": "^1.0",
-        "wyrihaximus/react-parallel-runtime": "^1.0",
-        "wyrihaximus/ticking-promise": "^1.6"
+        "wyrihaximus/constants": "^1.4.3"
     },
     "require-dev": {
         "moneyphp/money": "^3.2 || ^3.2.1",
         "ocramius/package-versions": "^1.4",
-        "wyrihaximus/async-test-utilities": "^1.1",
-        "wyrihaximus/iterator-or-array-to-array": "^1.1",
-        "wyrihaximus/react-parallel-pool-tests": "^1.0"
+        "thecodingmachine/safe": "1.0.0 as 0.1.17",
+        "wyrihaximus/async-test-utilities": "dev-update-to-test-utilities-2.0 as 1.999.999",
+        "wyrihaximus/iterator-or-array-to-array": "^1.1"
     },
     "config": {
         "platform": {
-            "php": "7.3"
+            "php": "7.4"
         },
         "sort-packages": true
     },
     "autoload": {
         "psr-4": {
-            "WyriHaximus\\React\\Parallel\\": "src/"
+            "ReactParallel\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "WyriHaximus\\React\\Tests\\Parallel\\": "tests/"
+            "ReactParallel\\Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
             "composer normalize"
         ],
         "post-update-cmd": [
             "composer normalize"
-        ],
-        "ci-coverage": [
-            "if [ -f ./build/logs/clover.xml ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml; fi"
-        ],
-        "cs": [
-            "php-cs-fixer fix --config=.php_cs --ansi --dry-run --diff --verbose --allow-risky=yes --show-progress=estimating"
-        ],
-        "cs-fix": [
-            "php-cs-fixer fix --config=.php_cs --ansi --verbose --allow-risky=yes --show-progress=estimating"
-        ],
-        "infection": [
-            "infection --ansi --min-msi=100 --min-covered-msi=100 --threads=$(nproc)"
-        ],
-        "lint-php": [
-            "parallel-lint --exclude vendor ."
-        ],
-        "qa-all": [
-            "composer validate --ansi",
-            "composer normalize --ansi",
-            "@lint-php",
-            "@cs",
-            "@stan",
-            "@unit",
-            "@infection"
-        ],
-        "qa-all-extended": [
-            "composer validate --ansi",
-            "composer normalize --ansi",
-            "@lint-php",
-            "@cs",
-            "@stan",
-            "@unit-coverage",
-            "@infection"
-        ],
-        "qa-ci": [
-            "@unit"
-        ],
-        "qa-ci-extended": [
-            "@qa-all-extended"
-        ],
-        "qa-ci-windows": [
-            "@qa-windows"
-        ],
-        "qa-contrib": [
-            "@qa-all"
-        ],
-        "qa-windows": [
-            "@lint-php",
-            "@cs",
-            "@stan",
-            "@unit"
-        ],
-        "stan": [
-            "phpstan analyse src tests --level max --ansi -c phpstan.neon"
-        ],
-        "unit": [
-            "phpunit --colors=always -c phpunit.xml.dist"
-        ],
-        "unit-coverage": [
-            "phpunit --colors=always -c phpunit.xml.dist --coverage-text --coverage-html covHtml --coverage-clover ./build/logs/clover.xml"
         ]
     }
 }
