@@ -21,8 +21,7 @@
     "require-dev": {
         "moneyphp/money": "^3.2 || ^3.2.1",
         "ocramius/package-versions": "^1.4",
-        "thecodingmachine/safe": "1.0.0 as 0.1.17",
-        "wyrihaximus/async-test-utilities": "dev-update-to-test-utilities-2.0 as 1.999.999",
+        "wyrihaximus/async-test-utilities": "^2.0.0-alpha1",
         "wyrihaximus/iterator-or-array-to-array": "^1.1"
     },
     "config": {
