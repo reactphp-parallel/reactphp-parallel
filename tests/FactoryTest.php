@@ -47,4 +47,24 @@ final class FactoryTest extends AsyncTestCase
         }, [333, 2]), $loop));
         $pool->close();
     }
+
+    /**
+     * @test
+     */
+    public function limitedPool(): void
+    {
+
+        $loop = EventLoopFactory::create();
+
+        /**
+         * Infection trick time
+         */
+        Factory::futureToPromiseConverter($loop);
+
+        $pool = Factory::limitedPool($loop, 1);
+        self::assertSame(666, $this->await($pool->run(function (int $a, int $b): int {
+            return $a * $b;
+        }, [333, 2]), $loop));
+        $pool->close();
+    }
 }
