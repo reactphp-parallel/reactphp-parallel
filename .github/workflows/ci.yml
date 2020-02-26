@@ -1,13 +1,12 @@
 name: Continuous Integration
 on:
   push:
-  schedule:
-    - cron:  '0 0 * * 0'
+  pull_request:
 jobs:
   composer-install:
     strategy:
       matrix:
-        php: [7.3, 7.4]
+        php: [7.4]
         composer: [lowest, current, highest]
     runs-on: ubuntu-latest
     container:
@@ -15,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Cache composer packages
-        uses: actions/cache@v1.0.1
+        uses: actions/cache@v1
         with:
           path: ./vendor/
           key: ${{ matrix.composer }}-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
@@ -28,31 +27,12 @@ jobs:
       - name: Install Dependencies
         run: composer update --ansi --no-progress --no-interaction --prefer-dist
         if: matrix.composer == 'highest'
-  examples:
-    strategy:
-      matrix:
-        php: [7.3, 7.4]
-        composer: [lowest, current, highest]
-        example: [sleep, versions]
-    needs: composer-install
-    runs-on: ubuntu-latest
-    container:
-      image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.10-dev-root
-    steps:
-      - uses: actions/checkout@v1
-      - name: Cache composer packages
-        uses: actions/cache@v1.0.1
-        with:
-          path: ./vendor/
-          key: ${{ matrix.composer }}-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
-      - name: 'Run Example: ${{ matrix.example }}'
-        run: php ./examples/${{ matrix.example }}.php
   qa:
     strategy:
       matrix:
-        php: [7.3, 7.4]
+        php: [7.4]
         composer: [lowest, current, highest]
-        command: [unit, mutation, lint, phpstan, cs]
+        qa: [lint, cs, stan, psalm, unit-ci, infection, composer-require-checker, composer-unused]
     needs: composer-install
     runs-on: ubuntu-latest
     container:
@@ -60,8 +40,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Cache composer packages
-        uses: actions/cache@v1.0.1
+        uses: actions/cache@v1
         with:
           path: ./vendor/
           key: ${{ matrix.composer }}-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
-      - run: make qa-${{ matrix.command }}
+      - run: make ${{ matrix.qa }}
