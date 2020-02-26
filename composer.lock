@@ -4,8 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be49ce6cab83ced9f115864ff1b837a4",
+    "content-hash": "ac9fd3135065f9531e249905dbbeebb3",
     "packages": [
+        {
+            "name": "react-parallel/contracts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp-parallel/contracts.git",
+                "reference": "b796438787c77fdea14ba4ebb7034fbaa8c188ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp-parallel/contracts/zipball/b796438787c77fdea14ba4ebb7034fbaa8c188ba",
+                "reference": "b796438787c77fdea14ba4ebb7034fbaa8c188ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4",
+                "react/promise": "^3.0 || ^2.7",
+                "wyrihaximus/pool-info": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ReactParallel\\Contracts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com",
+                    "homepage": "http://wyrihaximus.net/"
+                }
+            ],
+            "description": "Interfaces for ReactPHP ext-parallel related packages",
+            "time": "2020-02-12T20:42:57+00:00"
+        },
         {
             "name": "react-parallel/future-to-promise-converter",
             "version": "dev-master",
@@ -55,6 +94,60 @@
             ],
             "description": "ReactPHP ext-parallel Future to Promise converter",
             "time": "2020-02-13T08:09:35+00:00"
+        },
+        {
+            "name": "react-parallel/infinite-pool",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp-parallel/infinite-pool.git",
+                "reference": "1bbbe351a2da70bbe0af27209cae645643675766"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp-parallel/infinite-pool/zipball/1bbbe351a2da70bbe0af27209cae645643675766",
+                "reference": "1bbbe351a2da70bbe0af27209cae645643675766",
+                "shasum": ""
+            },
+            "require": {
+                "ext-parallel": "*",
+                "php": "^7.4",
+                "react-parallel/contracts": "dev-master",
+                "react-parallel/future-to-promise-converter": "dev-master",
+                "react-parallel/runtime": "dev-master",
+                "react/event-loop": "^1.1",
+                "react/promise": "^2.7",
+                "wyrihaximus/pool-info": "^1.0",
+                "wyrihaximus/ticking-promise": "^1.6"
+            },
+            "require-dev": {
+                "bruli/php-value-objects": "^2.0",
+                "moneyphp/money": "^3.2 || ^3.2.1",
+                "ocramius/package-versions": "^1.4",
+                "react-parallel/pool-tests": "dev-master",
+                "thecodingmachine/safe": "1.0.0 as 0.1.17",
+                "wyrihaximus/async-test-utilities": "dev-update-to-test-utilities-2.0 as 1.999.999",
+                "wyrihaximus/iterator-or-array-to-array": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ReactParallel\\Pool\\Infinite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com",
+                    "homepage": "http://wyrihaximus.net/"
+                }
+            ],
+            "description": "♾️ Infinite pool for bridging ext-parallel and ReactPHP",
+            "time": "2020-02-14T18:59:13+00:00"
         },
         {
             "name": "react-parallel/runtime",
@@ -229,6 +322,134 @@
             ],
             "description": "Collection of constants for PHP",
             "time": "2020-02-16T17:58:25+00:00"
+        },
+        {
+            "name": "wyrihaximus/iterator-or-array-to-array",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WyriHaximus/php-iterator-or-array-to-array.git",
+                "reference": "2d8ea61e3c7affaee7deec1a0b0bdc667a3e9cc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WyriHaximus/php-iterator-or-array-to-array/zipball/2d8ea61e3c7affaee7deec1a0b0bdc667a3e9cc4",
+                "reference": "2d8ea61e3c7affaee7deec1a0b0bdc667a3e9cc4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "api-clients/cs-fixer-config": "^1.1",
+                "api-clients/test-utilities": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com"
+                }
+            ],
+            "description": "Like iterator_to_array but doesn't error when handed an array",
+            "time": "2018-12-29T20:17:57+00:00"
+        },
+        {
+            "name": "wyrihaximus/pool-info",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WyriHaximus/php-pool-info.git",
+                "reference": "db15fa8e327ab23414f2686d9c22c3fef2475613"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WyriHaximus/php-pool-info/zipball/db15fa8e327ab23414f2686d9c22c3fef2475613",
+                "reference": "db15fa8e327ab23414f2686d9c22c3fef2475613",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3",
+                "wyrihaximus/constants": "^1.2",
+                "wyrihaximus/iterator-or-array-to-array": "^1.1"
+            },
+            "require-dev": {
+                "wyrihaximus/test-utilities": "^1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WyriHaximus\\PoolInfo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com"
+                }
+            ],
+            "description": "Interface for pool info metrics",
+            "time": "2019-09-27T06:28:08+00:00"
+        },
+        {
+            "name": "wyrihaximus/ticking-promise",
+            "version": "1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WyriHaximus/TickingPromise.git",
+                "reference": "4bb99024402bb7526de8880f3dab0c1f0858def5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WyriHaximus/TickingPromise/zipball/4bb99024402bb7526de8880f3dab0c1f0858def5",
+                "reference": "4bb99024402bb7526de8880f3dab0c1f0858def5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0 || ^5.4",
+                "react/event-loop": "^1.0 || ^0.5 || ^0.4",
+                "react/promise": "~2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4",
+                "squizlabs/php_codesniffer": "^1.5.6",
+                "vectorface/dunit": "~1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WyriHaximus\\React\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com",
+                    "homepage": "http://wyrihaximus.net/"
+                }
+            ],
+            "description": "Wrapping ticks into a promise",
+            "time": "2018-04-05T12:36:50+00:00"
         }
     ],
     "packages-dev": [
@@ -5403,46 +5624,6 @@
             "time": "2020-02-16T22:48:09+00:00"
         },
         {
-            "name": "wyrihaximus/iterator-or-array-to-array",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WyriHaximus/php-iterator-or-array-to-array.git",
-                "reference": "2d8ea61e3c7affaee7deec1a0b0bdc667a3e9cc4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/php-iterator-or-array-to-array/zipball/2d8ea61e3c7affaee7deec1a0b0bdc667a3e9cc4",
-                "reference": "2d8ea61e3c7affaee7deec1a0b0bdc667a3e9cc4",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "api-clients/cs-fixer-config": "^1.1",
-                "api-clients/test-utilities": "^5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cees-Jan Kiewiet",
-                    "email": "ceesjank@gmail.com"
-                }
-            ],
-            "description": "Like iterator_to_array but doesn't error when handed an array",
-            "time": "2018-12-29T20:17:57+00:00"
-        },
-        {
             "name": "wyrihaximus/phpstan-rules-wrapper",
             "version": "1.2.2",
             "source": {
@@ -5557,6 +5738,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "react-parallel/future-to-promise-converter": 20,
+        "react-parallel/infinite-pool": 20,
         "react-parallel/runtime": 20
     },
     "prefer-stable": true,
