@@ -13,6 +13,7 @@
         "php": "^7.4",
         "ext-parallel": "*",
         "react-parallel/future-to-promise-converter": "dev-master",
+        "react-parallel/infinite-pool": "dev-master",
         "react-parallel/runtime": "dev-master",
         "react/event-loop": "^1.1",
         "react/promise": "^2.7",

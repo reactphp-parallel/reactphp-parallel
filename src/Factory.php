@@ -6,7 +6,9 @@ use Closure;
 use React\EventLoop\LoopInterface;
 use React\Promise\PromiseInterface;
 use ReactParallel\FutureToPromiseConverter\FutureToPromiseConverter;
+use ReactParallel\Pool\Infinite\Infinite;
 use ReactParallel\Runtime\Runtime;
+use const WyriHaximus\Constants\Numeric\ONE;
 
 final class Factory
 {
@@ -28,5 +30,10 @@ final class Factory
         return $runtime->run($closure, $args)->always(static function () use ($runtime): void {
             $runtime->close();
         });
+    }
+
+    public static function infinitePool(LoopInterface $loop): Infinite
+    {
+        return new Infinite($loop, ONE);
     }
 }
