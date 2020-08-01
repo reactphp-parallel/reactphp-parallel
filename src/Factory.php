@@ -1,56 +1,68 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace ReactParallel;
 
 use Closure;
 use React\EventLoop\LoopInterface;
 use React\Promise\PromiseInterface;
-use ReactParallel\FutureToPromiseConverter\FutureToPromiseConverter;
+use ReactParallel\EventLoop\EventLoopBridge;
 use ReactParallel\Pool\Infinite\Infinite;
 use ReactParallel\Pool\Limited\Limited;
-use ReactParallel\Runtime\Runtime;
+use ReactParallel\Streams\Factory as StreamsFactory;
+
 use const WyriHaximus\Constants\Numeric\ONE;
 
 final class Factory
 {
-    private ?FutureToPromiseConverter $futureToPromiseConverter = null;
-    private ?Infinite $infinitePool                             = null;
+    private LoopInterface $loop;
+    private ?EventLoopBridge $eventLoopBridge = null;
+    private ?Infinite $infinitePool           = null;
+    private ?StreamsFactory $streamsFactory   = null;
 
-    public function futureToPromiseConverter(LoopInterface $loop): FutureToPromiseConverter
+    public function __construct(LoopInterface $loop)
     {
-        if ($this->futureToPromiseConverter === null) {
-            $this->futureToPromiseConverter = new FutureToPromiseConverter($loop);
+        $this->loop = $loop;
+    }
+
+    public function eventLoopBridge(): EventLoopBridge
+    {
+        if ($this->eventLoopBridge === null) {
+            $this->eventLoopBridge = new EventLoopBridge($this->loop);
         }
 
-        return $this->futureToPromiseConverter;
+        return $this->eventLoopBridge;
+    }
+
+    public function streams(): StreamsFactory
+    {
+        if ($this->streamsFactory === null) {
+            $this->streamsFactory = new StreamsFactory($this->eventLoopBridge());
+        }
+
+        return $this->streamsFactory;
     }
 
     /**
      * @param mixed[] $args
      */
-    public function call(LoopInterface $loop, Closure $closure, array $args = []): PromiseInterface
+    public function call(Closure $closure, array $args = []): PromiseInterface
     {
-        $runtime = Runtime::create($this->futureToPromiseConverter($loop));
-
-        /**
-         * @psalm-suppress UndefinedInterfaceMethod
-         */
-        return $runtime->run($closure, $args)->always(static function () use ($runtime): void {
-            $runtime->close();
-        });
+        return $this->infinitePool()->run($closure, $args);
     }
 
-    public function infinitePool(LoopInterface $loop): Infinite
+    public function infinitePool(): Infinite
     {
         if ($this->infinitePool === null) {
-            $this->infinitePool = new Infinite($loop, ONE);
+            $this->infinitePool = new Infinite($this->loop, $this->eventLoopBridge(), ONE);
         }
 
         return $this->infinitePool;
     }
 
-    public function limitedPool(LoopInterface $loop, int $threadCount): Limited
+    public function limitedPool(int $threadCount): Limited
     {
-        return Limited::createWithPool($this->infinitePool($loop), $threadCount);
+        return Limited::createWithPool($this->infinitePool(), $threadCount);
     }
 }
