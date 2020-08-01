@@ -3,6 +3,18 @@ on:
   push:
   pull_request:
 jobs:
+  generate-checks-strategy:
+    name: Generate Checks
+    runs-on: ubuntu-latest
+    outputs:
+      check: ${{ steps.generate-checks-strategy.outputs.check }}
+    steps:
+      - uses: actions/checkout@v1
+      - id: generate-checks-strategy
+        name: Generate check
+        run: |
+          printf "Checks found: %s\r\n" $(make task-list-ci)
+          printf "::set-output name=check::%s" $(make task-list-ci)
   lint:
    runs-on: ubuntu-latest
    steps:
@@ -17,7 +29,7 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     container:
-      image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.11-dev-root
+      image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.12-dev-root
     steps:
       - uses: actions/checkout@v1
       - name: Cache composer packages
@@ -40,11 +52,13 @@ jobs:
       matrix:
         php: [7.4]
         composer: [lowest, current, highest]
-        qa: [lint, cs, stan, psalm, unit-ci, infection, composer-require-checker, composer-unused, backward-compatibility-check]
-    needs: composer-install
+        check: ${{ fromJson(needs.generate-checks-strategy.outputs.check) }}
+    needs:
+      - composer-install
+      - generate-checks-strategy
     runs-on: ubuntu-latest
     container:
-      image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.11-dev-root
+      image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.12-dev-root
     steps:
       - uses: actions/checkout@v1
       - name: Cache composer packages
@@ -62,6 +76,6 @@ jobs:
         run: (test -f vendor && true ) || composer update --ansi --no-progress --no-interaction --prefer-dist -o
         if: matrix.composer == 'highest'
       - name: Fetch Tags
-        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-        if: matrix.qa == 'backward-compatibility-check'
-      - run: make ${{ matrix.qa }}
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
+        if: matrix.check == 'backward-compatibility-check'
+      - run: make ${{ matrix.check }}
