@@ -17,13 +17,14 @@ final class FactoryTest extends AsyncTestCase
     public function call(): void
     {
         $loop = EventLoopFactory::create();
+        $factory = new Factory();
 
         /**
          * Infection trick time
          */
-        Factory::futureToPromiseConverter($loop);
+        $factory->futureToPromiseConverter($loop);
 
-        self::assertSame(666, $this->await(Factory::call($loop, function (int $a, int $b): int {
+        self::assertSame(666, $this->await($factory->call($loop, function (int $a, int $b): int {
             return $a * $b;
         }, [333, 2]), $loop));
     }
@@ -33,15 +34,15 @@ final class FactoryTest extends AsyncTestCase
      */
     public function infinitePool(): void
     {
-
         $loop = EventLoopFactory::create();
+        $factory = new Factory();
 
         /**
          * Infection trick time
          */
-        Factory::futureToPromiseConverter($loop);
+        $factory->futureToPromiseConverter($loop);
 
-        $pool = Factory::infinitePool($loop);
+        $pool = $factory->infinitePool($loop);
         self::assertSame(666, $this->await($pool->run(function (int $a, int $b): int {
             return $a * $b;
         }, [333, 2]), $loop));
@@ -53,15 +54,15 @@ final class FactoryTest extends AsyncTestCase
      */
     public function limitedPool(): void
     {
-
         $loop = EventLoopFactory::create();
+        $factory = new Factory();
 
         /**
          * Infection trick time
          */
-        Factory::futureToPromiseConverter($loop);
+        $factory->futureToPromiseConverter($loop);
 
-        $pool = Factory::limitedPool($loop, 1);
+        $pool = $factory->limitedPool($loop, 1);
         self::assertSame(666, $this->await($pool->run(function (int $a, int $b): int {
             return $a * $b;
         }, [333, 2]), $loop));
