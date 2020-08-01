@@ -46,6 +46,62 @@
             "time": "2020-02-12T20:42:57+00:00"
         },
         {
+            "name": "react-parallel/event-loop",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp-parallel/event-loop.git",
+                "reference": "5070e4eb25393d8ada563639b0a1a515f824eb54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp-parallel/event-loop/zipball/5070e4eb25393d8ada563639b0a1a515f824eb54",
+                "reference": "5070e4eb25393d8ada563639b0a1a515f824eb54",
+                "shasum": ""
+            },
+            "require": {
+                "ext-parallel": "*",
+                "php": "^7.4",
+                "react/event-loop": "^1.1",
+                "react/promise": "^2.7",
+                "reactivex/rxphp": "^2.0",
+                "wyrihaximus/constants": "^1.4.3"
+            },
+            "require-dev": {
+                "wyrihaximus/async-test-utilities": "^2.2"
+            },
+            "type": "library",
+            "extra": {
+                "unused": [
+                    "ext-parallel"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "ReactParallel\\EventLoop\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com",
+                    "homepage": "http://wyrihaximus.net/"
+                }
+            ],
+            "description": "🌀🌀 Event Loop bridge to ext-parallel Events",
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-07T16:41:12+00:00"
+        },
+        {
             "name": "react-parallel/future-to-promise-converter",
             "version": "dev-master",
             "source": {
@@ -66,8 +122,7 @@
                 "react/promise": "^2.7"
             },
             "require-dev": {
-                "thecodingmachine/safe": "1.0.0 as 0.1.17",
-                "wyrihaximus/async-test-utilities": "dev-update-to-test-utilities-2.0 as 1.999.999"
+                "wyrihaximus/async-test-utilities": "^2.0.0-alpha1"
             },
             "type": "library",
             "extra": {
@@ -92,7 +147,7 @@
                     "homepage": "http://wyrihaximus.net/"
                 }
             ],
-            "description": "ReactPHP ext-parallel Future to Promise converter",
+            "description": "🛸 ext-parallel Future to ReactPHP Promise converter",
             "time": "2020-02-13T08:09:35+00:00"
         },
         {
@@ -220,13 +275,13 @@
             "require": {
                 "ext-parallel": "*",
                 "php": "^7.4",
-                "react-parallel/future-to-promise-converter": "dev-master",
+                "react-parallel/event-loop": "^1.0",
                 "react/event-loop": "^1.1",
                 "react/promise": "^2.7",
                 "wyrihaximus/constants": "^1.4.3"
             },
             "require-dev": {
-                "wyrihaximus/async-test-utilities": "^2.0.0-alpha1",
+                "wyrihaximus/async-test-utilities": "^2.2",
                 "wyrihaximus/ticking-promise": "^1.6"
             },
             "type": "library",
@@ -246,7 +301,13 @@
                     "homepage": "http://wyrihaximus.net/"
                 }
             ],
-            "description": "Convinence wrapper around ext-parallel Runtime for and ReactPHP",
+            "description": "💨 Convinence wrapper around ext-parallel Runtime for and ReactPHP",
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                }
+            ],
             "time": "2020-02-21T16:55:46+00:00"
         },
         {
@@ -338,17 +399,82 @@
             "time": "2019-01-07T21:25:54+00:00"
         },
         {
-            "name": "wyrihaximus/constants",
-            "version": "1.4.3",
+            "name": "reactivex/rxphp",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WyriHaximus/php-constants.git",
-                "reference": "1205928c3f4bfe811b238a3503c08c94ad4af4e4"
+                "url": "https://github.com/ReactiveX/RxPHP.git",
+                "reference": "fd74a0cd2b5edd4a48e4ff12aaa44cc6cdc4a9b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/php-constants/zipball/1205928c3f4bfe811b238a3503c08c94ad4af4e4",
-                "reference": "1205928c3f4bfe811b238a3503c08c94ad4af4e4",
+                "url": "https://api.github.com/repos/ReactiveX/RxPHP/zipball/fd74a0cd2b5edd4a48e4ff12aaa44cc6cdc4a9b4",
+                "reference": "fd74a0cd2b5edd4a48e4ff12aaa44cc6cdc4a9b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.0",
+                "react/promise": "~2.2"
+            },
+            "require-dev": {
+                "phpunit/phpcov": "^3.1",
+                "phpunit/phpunit": "^5.7",
+                "react/event-loop": "^1.0 || ^0.5 || ^0.4.2",
+                "satooshi/php-coveralls": "~1.0"
+            },
+            "suggest": {
+                "react/event-loop": "Used for scheduling async operations"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rx\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
+                },
+                {
+                    "name": "David Dan",
+                    "email": "davidwdan@gmail.com"
+                },
+                {
+                    "name": "Matt Bonneau",
+                    "email": "matt@bonneau.net"
+                }
+            ],
+            "description": "Reactive extensions for php.",
+            "homepage": "https://github.com/ReactiveX/RxPHP",
+            "keywords": [
+                "extensions",
+                "reactive",
+                "rx"
+            ],
+            "time": "2018-04-18T01:34:36+00:00"
+        },
+        {
+            "name": "wyrihaximus/constants",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WyriHaximus/php-constants.git",
+                "reference": "a2202b683261f8119f3772eb1e3469a2b5c4d9eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WyriHaximus/php-constants/zipball/a2202b683261f8119f3772eb1e3469a2b5c4d9eb",
+                "reference": "a2202b683261f8119f3772eb1e3469a2b5c4d9eb",
                 "shasum": ""
             },
             "require": {
@@ -375,7 +501,7 @@
                 }
             ],
             "description": "Collection of constants for PHP",
-            "time": "2020-02-16T17:58:25+00:00"
+            "time": "2020-04-02T21:00:04+00:00"
         },
         {
             "name": "wyrihaximus/iterator-or-array-to-array",
@@ -1780,6 +1906,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1826,6 +1953,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -1874,6 +2002,7 @@
             ],
             "description": "This tool check syntax of PHP files about 20x faster than serial check.",
             "homepage": "https://github.com/JakubOnderka/PHP-Parallel-Lint",
+            "abandoned": "php-parallel-lint/php-parallel-lint",
             "time": "2018-02-24T15:31:20+00:00"
         },
         {
@@ -3574,12 +3703,12 @@
             "version": "0.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/psalm/phpunit-psalm-plugin.git",
+                "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
                 "reference": "021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phpunit-psalm-plugin/zipball/021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
                 "reference": "021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
                 "shasum": ""
             },
@@ -5805,5 +5934,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.4"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
