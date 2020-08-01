@@ -13,17 +13,24 @@ use const WyriHaximus\Constants\Numeric\ONE;
 
 final class Factory
 {
-    public static function futureToPromiseConverter(LoopInterface $loop): FutureToPromiseConverter
+    private ?FutureToPromiseConverter $futureToPromiseConverter = null;
+    private ?Infinite $infinitePool                             = null;
+
+    public function futureToPromiseConverter(LoopInterface $loop): FutureToPromiseConverter
     {
-        return new FutureToPromiseConverter($loop);
+        if ($this->futureToPromiseConverter === null) {
+            $this->futureToPromiseConverter = new FutureToPromiseConverter($loop);
+        }
+
+        return $this->futureToPromiseConverter;
     }
 
     /**
      * @param mixed[] $args
      */
-    public static function call(LoopInterface $loop, Closure $closure, array $args = []): PromiseInterface
+    public function call(LoopInterface $loop, Closure $closure, array $args = []): PromiseInterface
     {
-        $runtime = Runtime::create(self::futureToPromiseConverter($loop));
+        $runtime = Runtime::create($this->futureToPromiseConverter($loop));
 
         /**
          * @psalm-suppress UndefinedInterfaceMethod
@@ -33,13 +40,17 @@ final class Factory
         });
     }
 
-    public static function infinitePool(LoopInterface $loop): Infinite
+    public function infinitePool(LoopInterface $loop): Infinite
     {
-        return new Infinite($loop, ONE);
+        if ($this->infinitePool === null) {
+            $this->infinitePool = new Infinite($loop, ONE);
+        }
+
+        return $this->infinitePool;
     }
 
-    public static function limitedPool(LoopInterface $loop, int $threadCount): Limited
+    public function limitedPool(LoopInterface $loop, int $threadCount): Limited
     {
-        return Limited::create($loop, $threadCount);
+        return Limited::createWithPool($this->infinitePool($loop), $threadCount);
     }
 }

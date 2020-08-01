@@ -12,7 +12,7 @@
         "@default": true,
         "MethodCallRemoval": {
             "ignore": [
-                "ReactParallel\\Factory::call::32"
+                "ReactParallel\\Factory::call::39"
             ]
         }
     }
