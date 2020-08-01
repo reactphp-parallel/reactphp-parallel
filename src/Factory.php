@@ -26,6 +26,11 @@ final class Factory
         $this->loop = $loop;
     }
 
+    public function loop(): LoopInterface
+    {
+        return $this->loop;
+    }
+
     public function eventLoopBridge(): EventLoopBridge
     {
         if ($this->eventLoopBridge === null) {
