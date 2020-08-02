@@ -12,6 +12,7 @@
     "require": {
         "php": "^7.4",
         "ext-parallel": "*",
+        "react-parallel/contracts": "^1.0",
         "react-parallel/event-loop": "^1.0",
         "react-parallel/infinite-pool": "^2.0",
         "react-parallel/limited-pool": "dev-master",
