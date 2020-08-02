@@ -55,11 +55,11 @@ final class FactoryTest extends AsyncTestCase
     /**
      * @test
      */
-    public function infinitePool(): void
+    public function lowLevelPool(): void
     {
         $factory = new Factory(EventLoopFactory::create());
 
-        $pool = $factory->infinitePool();
+        $pool = $factory->lowLevelPool();
         self::assertSame(666, $this->await($pool->run(function (int $a, int $b): int {
             return $a * $b;
         }, [333, 2]), $factory->loop()));

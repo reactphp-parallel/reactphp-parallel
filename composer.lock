@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4d938ab2f63c139e16251cfc8af0fa1",
+    "content-hash": "5ea7dd09b1d5a9cdda473fd20669687e",
     "packages": [
         {
             "name": "react-parallel/contracts",

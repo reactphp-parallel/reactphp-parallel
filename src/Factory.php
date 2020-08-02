@@ -7,6 +7,7 @@ namespace ReactParallel;
 use Closure;
 use React\EventLoop\LoopInterface;
 use React\Promise\PromiseInterface;
+use ReactParallel\Contracts\LowLevelPoolInterface;
 use ReactParallel\EventLoop\EventLoopBridge;
 use ReactParallel\Pool\Infinite\Infinite;
 use ReactParallel\Pool\Limited\Limited;
@@ -17,9 +18,9 @@ use const WyriHaximus\Constants\Numeric\ONE;
 final class Factory
 {
     private LoopInterface $loop;
-    private ?EventLoopBridge $eventLoopBridge = null;
-    private ?Infinite $infinitePool           = null;
-    private ?StreamsFactory $streamsFactory   = null;
+    private ?EventLoopBridge $eventLoopBridge    = null;
+    private ?LowLevelPoolInterface $infinitePool = null;
+    private ?StreamsFactory $streamsFactory      = null;
 
     public function __construct(LoopInterface $loop)
     {
@@ -54,10 +55,10 @@ final class Factory
      */
     public function call(Closure $closure, array $args = []): PromiseInterface
     {
-        return $this->infinitePool()->run($closure, $args);
+        return $this->lowLevelPool()->run($closure, $args);
     }
 
-    public function infinitePool(): Infinite
+    public function lowLevelPool(): LowLevelPoolInterface
     {
         if ($this->infinitePool === null) {
             $this->infinitePool = new Infinite($this->loop, $this->eventLoopBridge(), ONE);
@@ -68,6 +69,6 @@ final class Factory
 
     public function limitedPool(int $threadCount): Limited
     {
-        return Limited::createWithPool($this->infinitePool(), $threadCount);
+        return Limited::createWithPool($this->lowLevelPool(), $threadCount);
     }
 }
