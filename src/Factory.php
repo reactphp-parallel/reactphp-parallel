@@ -69,6 +69,6 @@ final class Factory
 
     public function limitedPool(int $threadCount): Limited
     {
-        return Limited::createWithPool($this->lowLevelPool(), $threadCount);
+        return new Limited($this->lowLevelPool(), $threadCount);
     }
 }

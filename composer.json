@@ -15,7 +15,7 @@
         "react-parallel/contracts": "^1.0",
         "react-parallel/event-loop": "^1.0",
         "react-parallel/infinite-pool": "^2.0",
-        "react-parallel/limited-pool": "dev-master",
+        "react-parallel/limited-pool": "^1.0",
         "react-parallel/runtime": "^2.0",
         "react-parallel/streams": "dev-master",
         "react/event-loop": "^1.1",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ea7dd09b1d5a9cdda473fd20669687e",
+    "content-hash": "df47daba3ecc6ac8183e1b2931d08135",
     "packages": [
         {
             "name": "react-parallel/contracts",
@@ -163,16 +163,16 @@
         },
         {
             "name": "react-parallel/limited-pool",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp-parallel/limited-pool.git",
-                "reference": "adff252b6ef2cf538165578659ab89c503f0831e"
+                "reference": "01001816a73dc754504cac380f0def65faaedd13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp-parallel/limited-pool/zipball/adff252b6ef2cf538165578659ab89c503f0831e",
-                "reference": "adff252b6ef2cf538165578659ab89c503f0831e",
+                "url": "https://api.github.com/repos/reactphp-parallel/limited-pool/zipball/01001816a73dc754504cac380f0def65faaedd13",
+                "reference": "01001816a73dc754504cac380f0def65faaedd13",
                 "shasum": ""
             },
             "require": {
@@ -218,7 +218,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-01T12:02:36+00:00"
+            "time": "2020-08-05T19:03:21+00:00"
         },
         {
             "name": "react-parallel/runtime",
@@ -7473,7 +7473,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "react-parallel/limited-pool": 20,
         "react-parallel/streams": 20
     },
     "prefer-stable": true,
