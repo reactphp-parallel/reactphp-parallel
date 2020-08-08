@@ -17,7 +17,7 @@
         "react-parallel/infinite-pool": "^2.0",
         "react-parallel/limited-pool": "^1.0",
         "react-parallel/runtime": "^2.0",
-        "react-parallel/streams": "dev-master",
+        "react-parallel/streams": "^1.0",
         "react/event-loop": "^1.1",
         "react/promise": "^2.8",
         "wyrihaximus/constants": "^1.5"
