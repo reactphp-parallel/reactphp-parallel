@@ -9,6 +9,8 @@
         "text": "infection.log"
     },
     "mutators": {
-        "@default": true
+        "@default": true,
+        "CloneRemoval": false,
+        "InstanceOf_": false
     }
 }
