@@ -24,8 +24,10 @@
         "wyrihaximus/metrics": "^1"
     },
     "require-dev": {
+        "ancarda/psr7-string-stream": "^1.3",
         "moneyphp/money": "^3.3",
         "ocramius/package-versions": "^1.9",
+        "react/http": "^1.1",
         "wyrihaximus/async-test-utilities": "^3.2",
         "wyrihaximus/iterator-or-array-to-array": "^1.1"
     },
