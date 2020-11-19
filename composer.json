@@ -25,7 +25,7 @@
     "require-dev": {
         "moneyphp/money": "^3.3",
         "ocramius/package-versions": "^1.9",
-        "wyrihaximus/async-test-utilities": "^2.2",
+        "wyrihaximus/async-test-utilities": "^3.2",
         "wyrihaximus/iterator-or-array-to-array": "^1.1"
     },
     "config": {
