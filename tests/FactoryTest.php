@@ -6,7 +6,9 @@ use parallel\Channel;
 use parallel\Future;
 use React\EventLoop\Factory as EventLoopFactory;
 use ReactParallel\Factory;
+use ReactParallel\Metrics;
 use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
+use WyriHaximus\Metrics\Factory as MetricsFactory;
 use function parallel\run;
 
 final class FactoryTest extends AsyncTestCase
@@ -16,7 +18,7 @@ final class FactoryTest extends AsyncTestCase
      */
     public function eventLoopBridge(): void
     {
-        $factory = new Factory(EventLoopFactory::create());
+        $factory = (new Factory(EventLoopFactory::create()))->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $future = run(function (int $a, int $b): int {
             return $a * $b;
@@ -31,7 +33,7 @@ final class FactoryTest extends AsyncTestCase
      */
     public function streams(): void
     {
-        $factory = new Factory(EventLoopFactory::create());
+        $factory = (new Factory(EventLoopFactory::create()))->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $time = time();
         $channel = new Channel(Channel::Infinite);
@@ -45,7 +47,7 @@ final class FactoryTest extends AsyncTestCase
      */
     public function call(): void
     {
-        $factory = new Factory(EventLoopFactory::create());
+        $factory = (new Factory(EventLoopFactory::create()))->withMetrics(Metrics::create(MetricsFactory::create()));
 
         self::assertSame(666, $this->await($factory->call(function (int $a, int $b): int {
             return $a * $b;
@@ -57,7 +59,7 @@ final class FactoryTest extends AsyncTestCase
      */
     public function lowLevelPool(): void
     {
-        $factory = new Factory(EventLoopFactory::create());
+        $factory = (new Factory(EventLoopFactory::create()))->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $pool = $factory->lowLevelPool();
         self::assertSame(666, $this->await($pool->run(function (int $a, int $b): int {
@@ -71,7 +73,7 @@ final class FactoryTest extends AsyncTestCase
      */
     public function limitedPool(): void
     {
-        $factory = new Factory(EventLoopFactory::create());
+        $factory = (new Factory(EventLoopFactory::create()))->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $pool = $factory->limitedPool(1);
         self::assertSame(666, $this->await($pool->run(function (int $a, int $b): int {

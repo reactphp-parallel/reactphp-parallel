@@ -32,6 +32,22 @@ $factory->lowLevelPool(); // Returns a low level pool that will scale infinitely
 $factory->limitedPool(12); // Returns a limited pool with a maximum number of threads specified by you
 ```
 
+## Metrics
+
+This package supports metrics through [`wyrihaximus/metrics`](https://github.com/wyrihaximus/php-metrics):
+
+```php
+use React\EventLoop\Factory as EventLoopFactory;
+use ReactParallel\Factory;
+use ReactParallel\Metrics;
+use WyriHaximus\Metrics\Configuration;
+use WyriHaximus\Metrics\InMemory\Registry;
+
+$loop = EventLoopFactory::create();
+$registry = new Registry(Configuration::create());
+$factory = (new Factory($loop))->withMetrics(Metrics::create($registry));
+```
+
 ## License ##
 
 Copyright 2020 [Cees-Jan Kiewiet](http://wyrihaximus.net/)
