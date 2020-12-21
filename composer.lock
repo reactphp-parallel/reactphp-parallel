@@ -112,16 +112,16 @@
         },
         {
             "name": "react-parallel/event-loop",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp-parallel/event-loop.git",
-                "reference": "e859517ed6ef556ca6006ebff13899ed4e78bb93"
+                "reference": "d50e8997d82de806fee022b6d8b1d8d075f9ca3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp-parallel/event-loop/zipball/e859517ed6ef556ca6006ebff13899ed4e78bb93",
-                "reference": "e859517ed6ef556ca6006ebff13899ed4e78bb93",
+                "url": "https://api.github.com/repos/reactphp-parallel/event-loop/zipball/d50e8997d82de806fee022b6d8b1d8d075f9ca3e",
+                "reference": "d50e8997d82de806fee022b6d8b1d8d075f9ca3e",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                 "react/event-loop": "^1.1",
                 "react/promise": "^2.7",
                 "reactivex/rxphp": "^2.0",
-                "wyrihaximus/constants": "^1.4.3",
+                "wyrihaximus/constants": "^1.6.0",
                 "wyrihaximus/metrics": "^1.0"
             },
             "require-dev": {
@@ -161,7 +161,7 @@
             "description": "🌀🌉🌀 Event Loop bridge to ext-parallel Events",
             "support": {
                 "issues": "https://github.com/reactphp-parallel/event-loop/issues",
-                "source": "https://github.com/reactphp-parallel/event-loop/tree/1.1.0"
+                "source": "https://github.com/reactphp-parallel/event-loop/tree/1.2.0"
             },
             "funding": [
                 {
@@ -169,7 +169,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-17T20:50:24+00:00"
+            "time": "2020-12-19T16:47:19+00:00"
         },
         {
             "name": "react-parallel/infinite-pool",
