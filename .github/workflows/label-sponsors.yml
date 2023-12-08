@@ -11,7 +11,7 @@ jobs:
         name: Label sponsors ❤️
         runs-on: ubuntu-latest
         steps:
-            - uses: JasonEtco/is-sponsor-label-action@v1
+            - uses: JasonEtco/is-sponsor-label-action@v2
               with:
                 label: Sponsor Request ❤️
               env:
