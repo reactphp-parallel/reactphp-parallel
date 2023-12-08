@@ -9,7 +9,7 @@ jobs:
     outputs:
       check: ${{ steps.generate-checks-strategy.outputs.check }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - id: generate-checks-strategy
         name: Generate check
         run: |
@@ -31,7 +31,7 @@ jobs:
     container:
       image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.12-dev-root
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: Cache composer packages
         uses: actions/cache@v1
         with:
@@ -60,7 +60,7 @@ jobs:
     container:
       image: wyrihaximusnet/php:${{ matrix.php }}-zts-alpine3.12-dev-root
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: Cache composer packages
         uses: actions/cache@v1
         with:
