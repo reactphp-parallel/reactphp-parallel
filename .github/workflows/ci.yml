@@ -19,7 +19,7 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: Lint Code Base
-       uses: docker://github/super-linter:v2.2.0
+       uses: docker://github/super-linter:v2.2.2
   composer-install:
     strategy:
       fail-fast: false
