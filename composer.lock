@@ -810,6 +810,7 @@
                 }
             ],
             "description": "Like iterator_to_array but doesn't error when handed an array",
+            "abandoned": "Use [...$iteratorOrArray] instead of this package",
             "time": "2018-12-29T20:17:57+00:00"
         },
         {
