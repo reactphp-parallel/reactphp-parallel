@@ -21,7 +21,7 @@
         "react/event-loop": "^1.1",
         "react/promise": "^2.8",
         "wyrihaximus/constants": "^1.5",
-        "wyrihaximus/metrics": "^1"
+        "wyrihaximus/metrics": "^1 || ^2"
     },
     "require-dev": {
         "ancarda/psr7-string-stream": "^1.3",
