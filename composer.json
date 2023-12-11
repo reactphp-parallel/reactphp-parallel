@@ -19,7 +19,7 @@
         "react-parallel/runtime": "^2.0",
         "react-parallel/streams": "^1.0",
         "react/event-loop": "^1.1",
-        "react/promise": "^2.8",
+        "react/promise": "^2.8 || ^3.0",
         "wyrihaximus/constants": "^1.5",
         "wyrihaximus/metrics": "^1"
     },
