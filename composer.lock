@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6d1d90da921e7a9c39d107b14f2bc87",
+    "content-hash": "305e308cd8c8a698019502c8e8124a31",
     "packages": [
         {
             "name": "lcobucci/clock",
@@ -810,6 +810,7 @@
                 }
             ],
             "description": "Like iterator_to_array but doesn't error when handed an array",
+            "abandoned": "Use [...$iteratorOrArray] instead of this package",
             "time": "2018-12-29T20:17:57+00:00"
         },
         {
