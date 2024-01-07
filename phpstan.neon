@@ -1,8 +1,0 @@
-parameters:
-	ergebnis:
-		classesAllowedToBeExtended:
-			- Exception
-			- WyriHaximus\React\Tests\Parallel\AbstractPoolTest
-
-includes:
-	- vendor/wyrihaximus/async-test-utilities/rules.neon

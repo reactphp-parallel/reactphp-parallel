@@ -5,28 +5,20 @@ declare(strict_types=1);
 namespace ReactParallel;
 
 use Closure;
-use React\EventLoop\LoopInterface;
-use React\Promise\PromiseInterface;
 use ReactParallel\Contracts\LowLevelPoolInterface;
 use ReactParallel\EventLoop\EventLoopBridge;
 use ReactParallel\Pool\Infinite\Infinite;
 use ReactParallel\Pool\Limited\Limited;
 use ReactParallel\Streams\Factory as StreamsFactory;
 
-use const WyriHaximus\Constants\Numeric\ONE;
-
 final class Factory
 {
-    private LoopInterface $loop;
-    private ?Metrics $metrics                    = null;
-    private ?EventLoopBridge $eventLoopBridge    = null;
-    private ?LowLevelPoolInterface $infinitePool = null;
-    private ?StreamsFactory $streamsFactory      = null;
+    private const LOW_LEVEL_POOL_TTL = 0.666;
 
-    public function __construct(LoopInterface $loop)
-    {
-        $this->loop = $loop;
-    }
+    private Metrics|null $metrics                    = null;
+    private EventLoopBridge|null $eventLoopBridge    = null;
+    private LowLevelPoolInterface|null $infinitePool = null;
+    private StreamsFactory|null $streamsFactory      = null;
 
     public function withMetrics(Metrics $metrics): self
     {
@@ -36,15 +28,10 @@ final class Factory
         return $self;
     }
 
-    public function loop(): LoopInterface
-    {
-        return $this->loop;
-    }
-
     public function eventLoopBridge(): EventLoopBridge
     {
         if ($this->eventLoopBridge === null) {
-            $this->eventLoopBridge = new EventLoopBridge($this->loop);
+            $this->eventLoopBridge = new EventLoopBridge();
             if ($this->metrics instanceof Metrics) {
                 $this->eventLoopBridge = $this->eventLoopBridge->withMetrics($this->metrics->eventLoop());
             }
@@ -62,10 +49,8 @@ final class Factory
         return $this->streamsFactory;
     }
 
-    /**
-     * @param mixed[] $args
-     */
-    public function call(Closure $closure, array $args = []): PromiseInterface
+    /** @param mixed[] $args */
+    public function call(Closure $closure, array $args = []): mixed
     {
         return $this->lowLevelPool()->run($closure, $args);
     }
@@ -73,7 +58,7 @@ final class Factory
     public function lowLevelPool(): LowLevelPoolInterface
     {
         if ($this->infinitePool === null) {
-            $this->infinitePool = new Infinite($this->loop, $this->eventLoopBridge(), ONE);
+            $this->infinitePool = new Infinite($this->eventLoopBridge(), self::LOW_LEVEL_POOL_TTL);
             if ($this->metrics instanceof Metrics) {
                 $this->infinitePool = $this->infinitePool->withMetrics($this->metrics->infinitePool());
             }

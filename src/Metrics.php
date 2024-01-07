@@ -10,13 +10,8 @@ use WyriHaximus\Metrics\Registry;
 
 final class Metrics
 {
-    private EventLoopMetrics $eventLoop;
-    private InfinitePoolMetrics $infinitePool;
-
-    public function __construct(EventLoopMetrics $eventLoop, InfinitePoolMetrics $infinitePool)
+    public function __construct(private EventLoopMetrics $eventLoop, private InfinitePoolMetrics $infinitePool)
     {
-        $this->eventLoop    = $eventLoop;
-        $this->infinitePool = $infinitePool;
     }
 
     public static function create(Registry $registry): self
