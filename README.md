@@ -12,7 +12,7 @@
 To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `~`.
 
 ```
-composer require react-parallel/react-parallel 
+composer require react-parallel/react-parallel
 ```
 
 ## Usage
@@ -50,7 +50,7 @@ $factory = (new Factory($loop))->withMetrics(Metrics::create($registry));
 
 ## License ##
 
-Copyright 2020 [Cees-Jan Kiewiet](http://wyrihaximus.net/)
+Copyright 2024 [Cees-Jan Kiewiet](http://wyrihaximus.net/)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
