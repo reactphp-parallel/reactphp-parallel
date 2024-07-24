@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.1",
         "ext-parallel": "*",
         "react-parallel/contracts": "^2@dev",
         "react-parallel/event-loop": "^2@dev",
@@ -18,12 +18,12 @@
         "react-parallel/limited-pool": "^2@dev",
         "react-parallel/runtime": "^3@dev",
         "react-parallel/streams": "^2@dev",
-        "react/promise": "^3.1",
+        "react/promise": "^2.9 || ^3.1",
         "wyrihaximus/constants": "^1.5",
         "wyrihaximus/metrics": "^2"
     },
     "require-dev": {
-        "wyrihaximus/async-test-utilities": "^7.2"
+        "wyrihaximus/async-test-utilities": "^5 || ^7.2"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -45,7 +45,7 @@
             "infection/extension-installer": true
         },
         "platform": {
-            "php": "8.2.13"
+            "php": "8.1.13"
         },
         "sort-packages": true
     },
