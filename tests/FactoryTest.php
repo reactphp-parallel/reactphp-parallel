@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace ReactParallel\Tests;
 
 use parallel\Channel;
-use parallel\Future;
 use ReactParallel\Factory;
 use ReactParallel\Metrics;
 use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\Metrics\Factory as MetricsFactory;
 
-use function assert;
 use function parallel\run;
 use function time;
 
@@ -25,7 +23,6 @@ final class FactoryTest extends AsyncTestCase
         $future = run(static function (int $a, int $b): int {
             return $a * $b;
         }, [333, 2]);
-        assert($future instanceof Future);
 
         self::assertSame(666, $factory->eventLoopBridge()->await($future));
     }
