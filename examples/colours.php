@@ -1,16 +1,10 @@
 <?php
 
+declare(strict_types=1);
 
-use PackageVersions\Versions;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 use ReactParallel\Factory as ParallelFactory;
-use ReactParallel\ObjectProxy\Generated\Proxies\WyriHaximus\Metrics\Registry as RegistryProxy;
-use WyriHaximus\Metrics\Label;
-use function React\Promise\all;
-use WyriHaximus\React\Parallel\Finite;
-use function WyriHaximus\iteratorOrArrayToArray;
-use WyriHaximus\React\Parallel\ReturnThread;
-use WyriHaximus\React\Parallel\FiniteWorker;
+use function React\Async\async;
 
 $options = getopt(
     '',
@@ -22,26 +16,23 @@ $options = getopt(
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-$loop = Factory::create();
-echo 'Loop: ', get_class($loop), PHP_EOL;
+echo 'Loop: ', Loop::get()::class, PHP_EOL;
 
-$parallelFactory = new ParallelFactory($loop);
+$parallelFactory = new ParallelFactory();
 $pool = $parallelFactory->lowLevelPool();
 
-$loop->futureTick(static function () use ($pool, $options): void {
-    foreach (range(0, 7) as $i) {
-        $pool->run(static function (int $index, int $iterations, bool $delay): int {
+foreach (range(0, 7) as $i) {
+    Loop::futureTick(async(static function () use ($i, $pool, $options): void {
+        $pool->run(static function (int $index, int $iterations, bool $delay): bool {
             for ($i = 0; $i < $iterations; $i++) {
                 if ($delay) {
-                    usleep($i * 3.3);
+                    usleep((int) ($i * 0.3));
                 }
                 echo "\033[" . (30 + $index) . ";" . (40 + $index) . "m.\033[0m";
             }
             return true;
         }, [$i, (int)$options['iterations'], isset($options['delay'])]);
-    }
-});
+    }));
+}
 
 echo PHP_EOL, 'Loop::run()', PHP_EOL;
-$loop->run();
-echo PHP_EOL, 'Loop::done()', PHP_EOL;

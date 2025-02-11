@@ -1,26 +1,26 @@
 <?php
 
+declare(strict_types=1);
 
-use PackageVersions\Versions;
-use React\EventLoop\Factory;
-use WyriHaximus\React\Parallel\Finite;
+use React\EventLoop\Loop;
+use ReactParallel\Factory as ParallelFactory;
+use function React\Async\async;
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-$loop = Factory::create();
+$parallelFactory = new ParallelFactory();
+$pool = $parallelFactory->limitedPool(1);
 
-$finite = new Finite($loop, 1);
+Loop::futureTick(async(static function () use ($pool): void {
+    try {
+        $pool->run(static function () {
+            throw new RuntimeException('Whoops I did it again!');
 
-$finite->run(function () {
-    throw new RuntimeException('Whoops I did it again!');
-
-    return 'We shouldn\'t reach this!';
-})->done(function ($versions) use ($finite) {
-    var_export($versions);
-
-    $finite->close();
-});
-
-echo 'Loop::run()', PHP_EOL;
-$loop->run();
-echo 'Loop::done()', PHP_EOL;
+            return 'We shouldn\'t reach this!';
+        });
+    } catch (Throwable $error) {
+        echo $error, PHP_EOL;
+    } finally {
+        $pool->close();
+    }
+}));
