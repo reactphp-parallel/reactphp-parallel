@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "react-parallel/stubs": "^1.1",
-        "wyrihaximus/async-test-utilities": "^5 || ^7.2"
+        "wyrihaximus/async-test-utilities": "^5 || ^7.2 || ^9.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
