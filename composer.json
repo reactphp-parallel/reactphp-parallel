@@ -19,7 +19,7 @@
         "react-parallel/runtime": "^3.0.0",
         "react-parallel/streams": "^2.0.0",
         "react/promise": "^2.11 || ^3.2",
-        "wyrihaximus/metrics": "^2"
+        "wyrihaximus/metrics": "^2 || ^3"
     },
     "require-dev": {
         "react-parallel/stubs": "^1.1",
