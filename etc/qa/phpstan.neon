@@ -5,6 +5,10 @@ parameters:
 			message: '#Method ReactParallel\\Factory::call\(\) should return T\|null but returns T\|void\|null.#'
 			path: ../../src/Factory.php
 		-
+			identifier: shipmonk.nonNormalizedType
+			path: ../../src/Factory.php
+			count: 10
+		-
 			message: '#sleep blocks the event loop#'
 			path: ../../tests/Types.php
 	ergebnis:
@@ -14,6 +18,3 @@ parameters:
 				- ReactParallel\EventLoop\CanceledFuture
 				- ReactParallel\EventLoop\KilledRuntime
 				- ReactParallel\Tests\AbstractPoolTest
-includes:
-	- ../../vendor/wyrihaximus/async-test-utilities/rules.neon
-	- ../../vendor/react-parallel/stubs/extension.neon

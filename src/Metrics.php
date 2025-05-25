@@ -8,10 +8,12 @@ use ReactParallel\EventLoop\Metrics as EventLoopMetrics;
 use ReactParallel\Pool\Infinite\Metrics as InfinitePoolMetrics;
 use WyriHaximus\Metrics\Registry;
 
-final class Metrics
+final readonly class Metrics
 {
-    public function __construct(private EventLoopMetrics $eventLoop, private InfinitePoolMetrics $infinitePool)
-    {
+    public function __construct(
+        public EventLoopMetrics $eventLoop,
+        public InfinitePoolMetrics $infinitePool,
+    ) {
     }
 
     public static function create(Registry $registry): self
@@ -22,11 +24,13 @@ final class Metrics
         );
     }
 
+    /** @deprecated Use eventLoop property instead */
     public function eventLoop(): EventLoopMetrics
     {
         return $this->eventLoop;
     }
 
+    /** @deprecated Use infinitePool property instead */
     public function infinitePool(): InfinitePoolMetrics
     {
         return $this->infinitePool;

@@ -13,7 +13,7 @@ use ReactParallel\Streams\Factory as StreamsFactory;
 
 final class Factory
 {
-    private const LOW_LEVEL_POOL_TTL = 0.666;
+    private const float LOW_LEVEL_POOL_TTL = 0.666;
 
     private Metrics|null $metrics                    = null;
     private EventLoopBridge|null $eventLoopBridge    = null;
@@ -30,10 +30,10 @@ final class Factory
 
     public function eventLoopBridge(): EventLoopBridge
     {
-        if ($this->eventLoopBridge === null) {
+        if (! $this->eventLoopBridge instanceof EventLoopBridge) {
             $this->eventLoopBridge = new EventLoopBridge();
             if ($this->metrics instanceof Metrics) {
-                $this->eventLoopBridge = $this->eventLoopBridge->withMetrics($this->metrics->eventLoop());
+                $this->eventLoopBridge = $this->eventLoopBridge->withMetrics($this->metrics->eventLoop);
             }
         }
 
@@ -42,7 +42,7 @@ final class Factory
 
     public function streams(): StreamsFactory
     {
-        if ($this->streamsFactory === null) {
+        if (! $this->streamsFactory instanceof StreamsFactory) {
             $this->streamsFactory = new StreamsFactory($this->eventLoopBridge());
         }
 
@@ -81,10 +81,10 @@ final class Factory
 
     public function lowLevelPool(): LowLevelPoolInterface
     {
-        if ($this->infinitePool === null) {
+        if (! $this->infinitePool instanceof LowLevelPoolInterface) {
             $this->infinitePool = new Infinite($this->eventLoopBridge(), self::LOW_LEVEL_POOL_TTL);
             if ($this->metrics instanceof Metrics) {
-                $this->infinitePool = $this->infinitePool->withMetrics($this->metrics->infinitePool());
+                $this->infinitePool = $this->infinitePool->withMetrics($this->metrics->infinitePool);
             }
         }
 

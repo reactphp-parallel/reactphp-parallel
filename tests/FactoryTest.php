@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ReactParallel\Tests;
 
 use parallel\Channel;
+use PHPUnit\Framework\Attributes\Test;
 use ReactParallel\Factory;
 use ReactParallel\Metrics;
 use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
@@ -15,7 +16,7 @@ use function time;
 
 final class FactoryTest extends AsyncTestCase
 {
-    /** @test */
+    #[Test]
     public function eventLoopBridge(): void
     {
         $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
@@ -27,7 +28,16 @@ final class FactoryTest extends AsyncTestCase
         self::assertSame(666, $factory->eventLoopBridge()->await($future));
     }
 
-    /** @test */
+    #[Test]
+    public function withMetrics(): void
+    {
+        $factory            = new Factory();
+        $factoryWithMetrics = $factory->withMetrics(Metrics::create(MetricsFactory::create()));
+
+        self::assertNotSame($factory, $factoryWithMetrics);
+    }
+
+    #[Test]
     public function streams(): void
     {
         $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
@@ -40,7 +50,7 @@ final class FactoryTest extends AsyncTestCase
         $channel->close();
     }
 
-    /** @test */
+    #[Test]
     public function call(): void
     {
         $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
@@ -50,7 +60,7 @@ final class FactoryTest extends AsyncTestCase
         }, [333, 2]));
     }
 
-    /** @test */
+    #[Test]
     public function lowLevelPool(): void
     {
         $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
@@ -62,7 +72,7 @@ final class FactoryTest extends AsyncTestCase
         $pool->close();
     }
 
-    /** @test */
+    #[Test]
     public function limitedPool(): void
     {
         $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
