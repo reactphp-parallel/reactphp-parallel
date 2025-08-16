@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "react-parallel/stubs": "^1.2",
-        "wyrihaximus/async-test-utilities": "^9.3.0",
+        "wyrihaximus/async-test-utilities": "^9.4.2",
         "wyrihaximus/makefiles": "^0.5.0"
     },
     "minimum-stability": "dev",
