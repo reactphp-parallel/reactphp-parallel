@@ -19,7 +19,7 @@ final class FactoryTest extends AsyncTestCase
     #[Test]
     public function eventLoopBridge(): void
     {
-        $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
+        $factory = new Factory()->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $future = run(static function (int $a, int $b): int {
             return $a * $b;
@@ -40,7 +40,7 @@ final class FactoryTest extends AsyncTestCase
     #[Test]
     public function streams(): void
     {
-        $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
+        $factory = new Factory()->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $time    = time();
         $channel = new Channel(Channel::Infinite);
@@ -53,7 +53,7 @@ final class FactoryTest extends AsyncTestCase
     #[Test]
     public function call(): void
     {
-        $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
+        $factory = new Factory()->withMetrics(Metrics::create(MetricsFactory::create()));
 
         self::assertSame(666, $factory->call(static function (int $a, int $b): int {
             return $a * $b;
@@ -63,7 +63,7 @@ final class FactoryTest extends AsyncTestCase
     #[Test]
     public function lowLevelPool(): void
     {
-        $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
+        $factory = new Factory()->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $pool = $factory->lowLevelPool();
         self::assertSame(666, $pool->run(static function (int $a, int $b): int {
@@ -75,7 +75,7 @@ final class FactoryTest extends AsyncTestCase
     #[Test]
     public function limitedPool(): void
     {
-        $factory = (new Factory())->withMetrics(Metrics::create(MetricsFactory::create()));
+        $factory = new Factory()->withMetrics(Metrics::create(MetricsFactory::create()));
 
         $pool = $factory->limitedPool(1);
         self::assertSame(666, $pool->run(static function (int $a, int $b): int {
