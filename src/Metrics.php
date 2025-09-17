@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ReactParallel;
 
+use Deprecated;
 use ReactParallel\EventLoop\Metrics as EventLoopMetrics;
 use ReactParallel\Pool\Infinite\Metrics as InfinitePoolMetrics;
 use WyriHaximus\Metrics\Registry;
@@ -24,13 +25,13 @@ final readonly class Metrics
         );
     }
 
-    /** @deprecated Use eventLoop property instead */
+    #[Deprecated(message: 'Use eventLoop property instead')]
     public function eventLoop(): EventLoopMetrics
     {
         return $this->eventLoop;
     }
 
-    /** @deprecated Use infinitePool property instead */
+    #[Deprecated(message: 'Use infinitePool property instead')]
     public function infinitePool(): InfinitePoolMetrics
     {
         return $this->infinitePool;
