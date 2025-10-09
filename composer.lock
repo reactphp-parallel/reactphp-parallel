@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dfdc2c2733240e2c800603ecd6e29796",
+    "content-hash": "e5f445b35438078ca52342b36a5e6d84",
     "packages": [
         {
             "name": "lcobucci/clock",
@@ -9524,16 +9524,16 @@
         },
         {
             "name": "wyrihaximus/makefiles",
-            "version": "0.6.0",
+            "version": "0.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WyriHaximus/Makefiles.git",
-                "reference": "f29f168198c37cb410b85bf08c2c81aab32e322b"
+                "reference": "7403f8891db4460dd1a621f33e7c33a2df90359b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/Makefiles/zipball/f29f168198c37cb410b85bf08c2c81aab32e322b",
-                "reference": "f29f168198c37cb410b85bf08c2c81aab32e322b",
+                "url": "https://api.github.com/repos/WyriHaximus/Makefiles/zipball/7403f8891db4460dd1a621f33e7c33a2df90359b",
+                "reference": "7403f8891db4460dd1a621f33e7c33a2df90359b",
                 "shasum": ""
             },
             "require": {
@@ -9541,8 +9541,11 @@
                 "ext-json": "^8.4",
                 "php": "^8.4"
             },
+            "conflict": {
+                "infection/infection": "<0.31.3"
+            },
             "require-dev": {
-                "wyrihaximus/test-utilities": "^8.0.0"
+                "wyrihaximus/test-utilities": "^8.4.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -9566,7 +9569,7 @@
             "description": "🧱 Makefile building blocks",
             "support": {
                 "issues": "https://github.com/WyriHaximus/Makefiles/issues",
-                "source": "https://github.com/WyriHaximus/Makefiles/tree/0.6.0"
+                "source": "https://github.com/WyriHaximus/Makefiles/tree/0.7.6"
             },
             "funding": [
                 {
@@ -9574,7 +9577,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-20T07:50:55+00:00"
+            "time": "2025-10-08T08:49:34+00:00"
         },
         {
             "name": "wyrihaximus/phpstan-react",
