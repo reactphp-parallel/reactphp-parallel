@@ -1,4 +1,8 @@
 parameters:
+	paths:
+		- ../../etc
+		- ../../src
+		- ../../tests
 	level: max
 	ignoreErrors:
 		-
