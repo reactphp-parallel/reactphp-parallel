@@ -15,7 +15,7 @@ require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR 
 $parallelFactory = new ParallelFactory();
 $pool = $parallelFactory->limitedPool(150);
 
-$signalHandler = function () use ($pool, &$signalHandler) {
+$signalHandler = function () use ($pool, &$signalHandler): void {
     Loop::removeSignal(SIGINT, $signalHandler);
     $pool->close();
 };
@@ -23,8 +23,8 @@ Loop::addSignal(SIGINT, $signalHandler);
 
 $promises = [];
 foreach (range(0, 5000) as $i) {
-    $promises[] = async(static fn(): string => $pool->run(function($json) {
-        $json = json_decode($json, true);
+    $promises[] = async(static fn(): string => $pool->run(function($json): string {
+        $json = json_decode((string) $json, true);
         return md5(json_encode($json));
     }, [$json]))();
 }
