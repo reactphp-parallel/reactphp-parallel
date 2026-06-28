@@ -13,7 +13,7 @@ require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR 
 $parallelFactory = new ParallelFactory();
 $pool = $parallelFactory->limitedPool(100);
 
-$timer = Loop::addPeriodicTimer(1, function () use ($pool) {
+$timer = Loop::addPeriodicTimer(1, function () use ($pool): void {
     var_export([...$pool->info()]);
 });
 
@@ -29,12 +29,12 @@ foreach (range(0, 250) as $i) {
     });
 }
 
-$signalHandler = function () use ($pool) {
+$signalHandler = function () use ($pool): void {
     Loop::stop();
     $pool->close();
 };
 
-Loop::futureTick(async(static function () use ($promises, $signalHandler, $pool, $timer) {
+Loop::futureTick(async(static function () use ($promises, $signalHandler, $pool, $timer): void {
     await(all($promises));
     $pool->close();
     Loop::removeSignal(SIGINT, $signalHandler);

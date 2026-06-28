@@ -13,7 +13,7 @@ $pool = $parallelFactory->limitedPool(1);
 
 Loop::futureTick(async(static function () use ($pool): void {
     try {
-        $pool->run(static function () {
+        $pool->run(static function (): string {
             throw new RuntimeException('Whoops I did it again!');
 
             return 'We shouldn\'t reach this!';
