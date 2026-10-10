@@ -5,14 +5,15 @@ declare(strict_types=1);
 use Composer\InstalledVersions;
 use React\EventLoop\Loop;
 use ReactParallel\Factory as ParallelFactory;
+
 use function React\Async\async;
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $parallelFactory = new ParallelFactory();
-$pool = $parallelFactory->limitedPool(2);
+$pool            = $parallelFactory->limitedPool(2);
 
-Loop::futureTick(async(static function () use ($pool, $timer) {
+Loop::futureTick(async(static function () use ($pool, $timer): void {
     var_export(
         $pool->run(
             static fn (): array => array_merge(
@@ -21,9 +22,9 @@ Loop::futureTick(async(static function () use ($pool, $timer) {
                         $package => InstalledVersions::getPrettyVersion($package),
                     ],
                     InstalledVersions::getInstalledPackages(),
-                )
-            )
-        )
+                ),
+            ),
+        ),
     );
 
     $pool->close();
