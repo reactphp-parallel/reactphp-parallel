@@ -2,7 +2,7 @@
     "timeout": 120,
     "source": {
         "directories": [
-            "src"
+            "../../src"
         ]
     },
     "logs": {
@@ -15,5 +15,6 @@
     "mutators": {
         "@default": true,
         "InstanceOf_": false
-    }
+    },
+    "threads": 64
 }
